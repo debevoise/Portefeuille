@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   authenticated do
     root :to => 'static_pages#root'
-    match '*path', to: 'static_pages#root', via: :all
+    
 
     namespace :api, defaults: { format: :json } do
       resources :transactions, only: :index do
@@ -26,10 +26,12 @@ Rails.application.routes.draw do
         end
       end
 
-      
+      resource :user, only: :show
 
       resources :stocks, only: :index
     end
+
+    match '*path', to: 'static_pages#root', via: :all
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

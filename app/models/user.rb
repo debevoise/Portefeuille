@@ -38,9 +38,9 @@ class User < ApplicationRecord
 			})
 
 			if transaction.valid? 
-				self.balance -= quantity * unit_price
+				self.balance = self.balance - (quantity * unit_price)
 				transaction.save
-				# self.save
+				self.save
 				return transaction
 			else 
 				return false

@@ -8,6 +8,8 @@ class Api::StocksController < ApplicationController
             .group(:stock)
             .sum('quantity')
             .to_a
+        
+        render 'api/stocks/index'
     end
     
 end
