@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 
 #### Simon added these: ####
 gem 'devise'
+gem 'jquery-rails'
 gem 'pry-rails'
 gem 'annotate'
 gem 'webpacker'

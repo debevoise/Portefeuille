@@ -1,7 +1,12 @@
-const userReducer = (state = {}, action) => {
+import { RECEIVE_USER } from "../actions/user_actions";
+
+const userReducer = (state = null, action) => {
     Object.freeze(state);
-    let nextState = Object.assign({}, state);
+
     switch (action.type) {
+        case RECEIVE_USER:
+            const { user } = action.payload;
+            return user;
         default:
             return state;
     }

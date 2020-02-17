@@ -1,0 +1,2 @@
+export const RECEIVE_STOCKS = 'RECEIVE_STOCKS';
+export const RECEIVE_STOCK = 'RECEIVE_STOCK';

@@ -1,24 +1,24 @@
 Rails.application.routes.draw do
-  # devise_for :users
+  devise_for :users, only: []
 
-  as :user do
+  devise_scope :user do
     get 'login', to: 'devise/sessions#new', as: :new_user_session
     post 'login', to: 'devise/sessions#create', as: :user_session
     delete 'logout', to: 'devise/sessions#destroy', as: :destroy_user_session
+    
     get 'signup', to: 'devise/registrations#new', as: :new_user_registration
     post 'signup', to: 'devise/registrations#create', as: :user_registration
   end
 
   unauthenticated do
     root :to => 'static_pages#splash'
-    # match '*path', to: 'static_pages#splash', via: :all
   end
 
   authenticated do
     root :to => 'static_pages#root'
     
-
     namespace :api, defaults: { format: :json } do
+      
       resources :transactions, only: :index do
         collection do
           post :buy, to: 'transactions#buy', as: 'buy'

@@ -1,10 +1,18 @@
 
 
-$orange: #db613c;
+$orange: #ec957a;
 $red: #db613c;
 $blue: #db613c;
 $green: #db613c;
 
-html {
-    background-color: red;
+$serif: 'Libre Baskerville', serif;
+$sans: 'IBM Plex Sans', sans-serif;
+
+body {
+    background-color: $orange;
+    color: white;
+    font-family: $serif;
+    
+    
 }
+
