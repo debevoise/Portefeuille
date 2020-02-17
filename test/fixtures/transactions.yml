@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: transactions
+#
+#  id         :bigint           not null, primary key
+#  quantity   :string           not null
+#  stock_id   :bigint
+#  user_id    :bigint
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  unit_price :float            not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity: MyString
+  unit_price: 1
+  stock: one
+  user: one
+
+two:
+  quantity: MyString
+  unit_price: 1
+  stock: two
+  user: two
