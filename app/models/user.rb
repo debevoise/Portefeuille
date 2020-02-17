@@ -26,13 +26,44 @@ class User < ApplicationRecord
 
 	def buy_stock(ticker, quantity, unit_price)
 		stock = Stock.find_by_ticker(ticker)
-		if stock && self.balance >= quantity * unit_price
+		return false if !stock 
 
-			
+		if self.balance >= quantity * unit_price
+			transaction = self.transactions.new({
+				stock_id: stock.id,
+				unit_price: unit_price,
+				quantity: quantity 
+			})
+
+			if transaction.valid? 
+				self.balance -= quantity * unit_price
+				transaction.save
+				# self.save
+				return transaction
+			else 
+				return false
+			end
 		else
-			return
+			self.errors.full_messages << "Insufficient funds"
+			return false
 		end
-		
+	end
+
+	def sell_stock(ticker, quantity, unit_price)
+		stock = Stock.find_by_ticker(ticker)
+		return false if !stock 
+
+		if self.balance >= quantity * unit_price
+			transaction = self.transactions.new({
+				stock_id: stock.id,
+				unit_price: unit_price,
+				quantity: quantity 
+			})
+			return transaction.save ? transaction : false
+		else
+			self.errors.full_messages << "Insufficient funds"
+			return false
+		end
 	end
 
 
