@@ -21,12 +21,14 @@ class User < ApplicationRecord
 	devise :database_authenticatable, :registerable,
 			:recoverable, :rememberable, :validatable
 
-	has_many :transactions
+	has_many :transactions, dependent: :destroy
 	has_many :stocks, through: :transactions
 
 	def buy_stock(ticker, quantity, unit_price)
 		stock = Stock.find_by_ticker(ticker)
 		return false if !stock 
+
+		return sell_stock(ticker, quantity, unit_price) if quantity < 0
 
 		if self.balance >= quantity * unit_price
 			transaction = self.transactions.new({
@@ -53,15 +55,15 @@ class User < ApplicationRecord
 		stock = Stock.find_by_ticker(ticker)
 		return false if !stock 
 
-		if self.balance >= quantity * unit_price
+		if quantity <= user.transactions.where(stock_id: stock.id).sum(:quantity)
 			transaction = self.transactions.new({
 				stock_id: stock.id,
 				unit_price: unit_price,
-				quantity: quantity 
+				quantity: -quantity 
 			})
 			return transaction.save ? transaction : false
 		else
-			self.errors.full_messages << "Insufficient funds"
+			self.errors.full_messages << "You can't sell that many stocks."
 			return false
 		end
 	end

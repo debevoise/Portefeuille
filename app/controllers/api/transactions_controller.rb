@@ -7,7 +7,7 @@ class Api::TransactionsController < ApplicationController
     end
 
     def buy
-
+        
     end
 
     def sell
