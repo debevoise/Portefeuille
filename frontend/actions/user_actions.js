@@ -13,42 +13,40 @@ export const logout = () => ({
 })
 
 export const fetchUser = () => dispatch => {
-    return fetch('/api/user').then(resp => resp.json()).then(
+    return $.ajax({ url: '/api/user'}).then(
         payload => dispatch(receiveUser(payload)),
         errors => dispatch(receiveErrors(errors))
     )
 }
 
 export const logoutUser = () => dispatch => {
-    return fetch("api/logout", {
-      method: "delete"
+    return $.ajax({ 
+        url: "/users/sign_out",
+        method: "delete"
     }).then(() => dispatch(logout()));
 }
 
-export const loginUser = () => dispatch => {
-  return fetch("api/login", {
-    method: "post"
-  }).then(resp => resp.json())
-    .then(user => dispatch(receiveUser(user)))
-    .catch(errors => receiveErrors(errors));
+export const loginUser = (user) => dispatch => {
+    return $.ajax({ 
+        url: '/users/sign_in', 
+        method: 'post', 
+        data: { user }
+    }).then(
+        payload => dispatch(receiveUser(payload)),
+        errors => dispatch(receiveErrors(errors))
+    )
 };
 
 export const signupUser = (user) => dispatch => {
-  return fetch("/users", {
-    method: "post",
-    body: {
-        user
-    },
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
-  })
-    .then(resp => resp.json())
-    .then(user => dispatch(receiveUser(user)))
-    .catch(errors => receiveErrors(errors));
+    return $.ajax({ 
+        url: '/users', 
+        method: 'post', 
+        data: { user }
+    }).then(
+        payload => dispatch(receiveUser(payload)),
+        errors => dispatch(receiveErrors(errors))
+    )
 };
 
-export const signupAjax = user => {
-    return $.ajax({ url: 'api/transactions' })
-}
+
 

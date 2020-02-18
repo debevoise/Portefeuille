@@ -111,7 +111,7 @@ var receiveErrors = function receiveErrors(errors) {
 /*!******************************************!*\
   !*** ./frontend/actions/user_actions.js ***!
   \******************************************/
-/*! exports provided: RECEIVE_USER, LOGOUT_USER, receiveUser, logout, fetchUser, logoutUser, loginUser, signupUser, signupAjax */
+/*! exports provided: RECEIVE_USER, LOGOUT_USER, receiveUser, logout, fetchUser, logoutUser, loginUser, signupUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -124,7 +124,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logoutUser", function() { return logoutUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginUser", function() { return loginUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signupUser", function() { return signupUser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signupAjax", function() { return signupAjax; });
 /* harmony import */ var _error_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./error_actions */ "./frontend/actions/error_actions.js");
 
 var RECEIVE_USER = 'RECEIVE_USER';
@@ -142,8 +141,8 @@ var logout = function logout() {
 };
 var fetchUser = function fetchUser() {
   return function (dispatch) {
-    return fetch('/api/user').then(function (resp) {
-      return resp.json();
+    return $.ajax({
+      url: '/api/user'
     }).then(function (payload) {
       return dispatch(receiveUser(payload));
     }, function (errors) {
@@ -153,49 +152,43 @@ var fetchUser = function fetchUser() {
 };
 var logoutUser = function logoutUser() {
   return function (dispatch) {
-    return fetch("api/logout", {
+    return $.ajax({
+      url: "/users/sign_out",
       method: "delete"
     }).then(function () {
       return dispatch(logout());
     });
   };
 };
-var loginUser = function loginUser() {
+var loginUser = function loginUser(user) {
   return function (dispatch) {
-    return fetch("api/login", {
-      method: "post"
-    }).then(function (resp) {
-      return resp.json();
-    }).then(function (user) {
-      return dispatch(receiveUser(user));
-    })["catch"](function (errors) {
-      return Object(_error_actions__WEBPACK_IMPORTED_MODULE_0__["receiveErrors"])(errors);
+    return $.ajax({
+      url: '/users/sign_in',
+      method: 'post',
+      data: {
+        user: user
+      }
+    }).then(function (payload) {
+      return dispatch(receiveUser(payload));
+    }, function (errors) {
+      return dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_0__["receiveErrors"])(errors));
     });
   };
 };
 var signupUser = function signupUser(user) {
   return function (dispatch) {
-    return fetch("/users", {
-      method: "post",
-      body: {
+    return $.ajax({
+      url: '/users',
+      method: 'post',
+      data: {
         user: user
-      },
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
       }
-    }).then(function (resp) {
-      return resp.json();
-    }).then(function (user) {
-      return dispatch(receiveUser(user));
-    })["catch"](function (errors) {
-      return Object(_error_actions__WEBPACK_IMPORTED_MODULE_0__["receiveErrors"])(errors);
+    }).then(function (payload) {
+      return dispatch(receiveUser(payload));
+    }, function (errors) {
+      return dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_0__["receiveErrors"])(errors));
     });
   };
-};
-var signupAjax = function signupAjax(user) {
-  return $.ajax({
-    url: 'api/transactions'
-  });
 };
 
 /***/ }),
@@ -219,6 +212,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./session/login */ "./frontend/components/session/login.jsx");
 /* harmony import */ var _session_signup__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./session/signup */ "./frontend/components/session/signup.jsx");
 /* harmony import */ var _welcome_splash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./welcome/splash */ "./frontend/components/welcome/splash.jsx");
+/* harmony import */ var _session_login_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./session/login_container */ "./frontend/components/session/login_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -236,6 +230,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -265,7 +260,7 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           exact: true,
           path: "/login",
-          component: _session_login__WEBPACK_IMPORTED_MODULE_6__["default"]
+          component: _session_login_container__WEBPACK_IMPORTED_MODULE_9__["default"]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           exact: true,
           path: "/signup",
@@ -461,7 +456,7 @@ function (_Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       e.stopPropagation();
-      this.props.signup;
+      this.props.login(this.state);
     }
   }, {
     key: "render",
@@ -508,6 +503,39 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
+
+/***/ }),
+
+/***/ "./frontend/components/session/login_container.js":
+/*!********************************************************!*\
+  !*** ./frontend/components/session/login_container.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login */ "./frontend/components/session/login.jsx");
+
+
+
+
+var msp = function msp() {
+  return {};
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    login: function login(user) {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["loginUser"])(user));
+    }
+  };
+};
+
+var LoginContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(_login__WEBPACK_IMPORTED_MODULE_2__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (LoginContainer);
 
 /***/ }),
 
@@ -831,7 +859,7 @@ document.addEventListener('DOMContentLoaded', function () {
   window.dispatch = store.dispatch;
   window.getState = store.getState;
   window.user = {
-    email: 'foo@bar.com',
+    email: 'foo@bazzz.com',
     password: 'foobar',
     password_confirmation: 'foobar'
   };
@@ -840,7 +868,10 @@ document.addEventListener('DOMContentLoaded', function () {
     return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["signupUser"])(user));
   };
 
-  window.fetchUser = _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUser"];
+  window.loginUser = function (user) {
+    return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["loginUser"])(user));
+  };
+
   window.$ = jquery__WEBPACK_IMPORTED_MODULE_5___default.a;
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store

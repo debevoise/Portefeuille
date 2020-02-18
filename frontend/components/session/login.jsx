@@ -19,7 +19,7 @@ export default class LoginForm extends Component {
     handleSubmit(e) {
 		e.preventDefault();
         e.stopPropagation();
-        this.props.signup
+        this.props.login(this.state)
     }
     
     render() {

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store'
-import { fetchUser, signupUser } from './actions/user_actions';
+import { fetchUser, signupUser, loginUser } from './actions/user_actions';
 import $ from 'jquery';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,12 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
     window.dispatch = store.dispatch;
     window.getState = store.getState;
     window.user = {
-        email: 'foo@bar.com',
+        email: 'foo@bazzz.com',
         password: 'foobar',
         password_confirmation: 'foobar'
     }
+
     window.signupUser = user => dispatch(signupUser(user));
-    window.fetchUser = fetchUser;
+    window.loginUser = user => dispatch(loginUser(user));
+
     window.$ = $;
 
 

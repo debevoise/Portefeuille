@@ -14,8 +14,8 @@ export const receiveTransaction = payload => ({
 })
 
 export const fetchTransactions = () => dispatch => {
-    return fetch('/api/transactions').then(resp => resp.json()).then(
-        payload => dispatch(receiveUser(payload)),
+    return $.ajax({ url: '/api/transactions' }).then(
+        payload => dispatch(receiveTransactions(payload)),
         errors => dispatch(receiveErrors(errors))
     )
 }
