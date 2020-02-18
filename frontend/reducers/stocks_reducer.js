@@ -1,9 +1,11 @@
-import { RECEIVE_USER } from "../actions/user_actions";
+import { RECEIVE_USER, LOGOUT_USER } from "../actions/user_actions";
 
 const stocksReducer = (state = {}, action) => {
     Object.freeze(state);
     let nextState = Object.assign({}, state);
     switch (action.type) {
+        case LOGOUT_USER:
+            return {};
         case RECEIVE_USER:
             return action.payload.stocks;
         default:
