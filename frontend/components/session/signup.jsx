@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 export default class SignupForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = { email: "", password: "", password_confirmation: ""};
-        this.update = this.update.bind(this)
+        this.update = this.update.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     update(field) {
@@ -14,7 +16,13 @@ export default class SignupForm extends Component {
                 [field]: e.currentTarget.value
             }); 
         }
-	}
+    }
+    
+    handleSubmit(e) {
+		e.preventDefault();
+        e.stopPropagation();
+        this.props.signup(this.state);
+    }
     
     render() {
         let {email, password_confirmation, password} = this.state;
@@ -22,9 +30,9 @@ export default class SignupForm extends Component {
         return (
             <main className="registration-container">
                 <section className="registration">
-                    <h2>Sign up</h2>
+                    <h1>Sign up</h1>
 
-                    <form className="new_user" id="new_user" action="/signup" acceptCharset="UTF-8" method="post">
+                    <form className="new_user" id="new_user" onSubmit={this.handleSubmit}>
                         <div className="field">
                             <label htmlFor="user_email">Email</label><br/>
                             <input 
@@ -66,7 +74,7 @@ export default class SignupForm extends Component {
                         </button>
                     </form>  
                     
-                    <a href="/login">Log in instead</a><br/>
+                    <Link to="/login">Log in instead</Link><br/>
                 </section>
             </main>
         )

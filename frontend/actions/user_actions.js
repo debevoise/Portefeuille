@@ -26,7 +26,7 @@ export const logoutUser = () => dispatch => {
     }).then(() => dispatch(logout()));
 }
 
-export const loginUser = (user) => dispatch => {
+export const loginUser = user => dispatch => {
     return $.ajax({ 
         url: '/users/sign_in', 
         method: 'post', 
@@ -37,14 +37,14 @@ export const loginUser = (user) => dispatch => {
     )
 };
 
-export const signupUser = (user) => dispatch => {
+export const signupUser = user => dispatch => {
     return $.ajax({ 
         url: '/users', 
         method: 'post', 
         data: { user }
     }).then(
         payload => dispatch(receiveUser(payload)),
-        errors => dispatch(receiveErrors(errors))
+        errors => dispatch(receiveErrors(errors.responseJSON))
     )
 };
 

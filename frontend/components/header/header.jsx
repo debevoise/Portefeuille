@@ -4,7 +4,6 @@ import { logoutUser } from '../../actions/user_actions';
 import { connect } from 'react-redux';
 
 const Header = ({logout}) => {
-    let history = useHistory();
     
     return (
       <header>
@@ -14,7 +13,7 @@ const Header = ({logout}) => {
             <li>
               <NavLink to="/stocks">Stocks</NavLink>
               <NavLink to="/transactions">Transactions</NavLink>
-              
+              <button onClick={logout}>Logout</button>
             </li>
           </ul>
         </div>

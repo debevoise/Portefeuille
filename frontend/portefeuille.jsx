@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.currentUser) {
         const loggedInState = {
             user: window.currentUser,
-            errors: { session: [] }
+            errors: [] 
         }; 
         
         store = configureStore(loggedInState);
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         const defaultState = {
             user: null,
-            errors: { session: [] }
+            errors: [] 
         };
         
         store = configureStore(defaultState);

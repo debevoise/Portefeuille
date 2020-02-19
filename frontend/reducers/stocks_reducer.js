@@ -7,7 +7,7 @@ const stocksReducer = (state = {}, action) => {
         case LOGOUT_USER:
             return {};
         case RECEIVE_USER:
-            return action.payload.stocks;
+            return action.payload.stocks || state;
         default:
             return state;
     }

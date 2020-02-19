@@ -5,11 +5,8 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /users/sign_in
   def create
-    # build_resource
-
     @user = User.find_by_email(params[:user][:email])
     
-
     if @user && @user.valid_password?(params[:user][:password])
       # sign_in("user", resource)
       sign_in(@user)

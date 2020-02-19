@@ -2,7 +2,9 @@ import { loginUser } from "../../actions/user_actions"
 import { connect } from "react-redux"
 import LoginForm from "./login"
 
-const msp = () => ({})
+const msp = state => (
+    { loggedIn: !!state.user }
+)
 
 const mdp = dispatch => {
     return {

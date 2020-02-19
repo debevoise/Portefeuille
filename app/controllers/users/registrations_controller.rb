@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
       render 'api/users/show'
     else
-      render json: resource.errors.full_messages
+      render json: resource.errors.full_messages, status: 422
     end
   end
 

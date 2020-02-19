@@ -2,17 +2,22 @@
 
 $orange: #ec957a;
 $red: #db613c;
-$blue: #db613c;
+$blue: #444dc8;
 $green: #db613c;
+$purple: #2c027a;
 
 $serif: 'Libre Baskerville', serif;
 $sans: 'IBM Plex Sans', sans-serif;
 
 body {
-    background-color: $orange;
+    background-color: $purple;
     color: white;
     font-family: $serif;
-    
-    
+}
+
+html, body, #root {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }
 

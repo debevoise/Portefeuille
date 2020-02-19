@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 export default class LoginForm extends Component {
     constructor(props) {
         super(props);
-        debugger
         this.state = { email: "", password: ""};
-        this.update = this.update.bind(this)
+        this.update = this.update.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     update(field) {
@@ -28,7 +29,7 @@ export default class LoginForm extends Component {
         return (
             <main className="registration-container">
                 <section className="registration">
-                    <h2>Log in</h2>
+                    <h1>Log in</h1>
 
                     <form className="new_user" acceptCharset="UTF-8" onSubmit={this.handleSubmit}>
                         <div className="field">
@@ -58,7 +59,7 @@ export default class LoginForm extends Component {
                             Log in
                         </button>
                     </form>
-
+                    <Link to="/signup">Sign up instead.</Link>
                 </section>
             </main>
         )
