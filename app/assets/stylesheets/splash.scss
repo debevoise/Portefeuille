@@ -15,7 +15,8 @@
 
     max-width: 70%;
     width: 80%;
-    height: 60%;
+    min-height: 60%;
+    height: auto;
     box-sizing: border-box;
     padding: 30px;
     border-radius: 10px;
@@ -62,6 +63,7 @@
             border-radius: 5px;
             background-color: $blue;
             color: white;
+            margin-top: 10px;
             padding: 20px;
             width: 300px;
             display: flex;

@@ -327,19 +327,22 @@ __webpack_require__.r(__webpack_exports__);
 
 var Header = function Header(_ref) {
   var logout = _ref.logout;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "inner-container"
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+    className: "header"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "logo"
-  }, "Portefeuille"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, "Portefeuille"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "nav"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    className: "navlink",
     to: "/stocks"
   }, "Stocks"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
+    className: "navlink",
     to: "/transactions"
   }, "Transactions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "navlink",
     onClick: logout
-  }, "Logout")))));
+  }, "Logout")));
 };
 
 var msp = function msp() {

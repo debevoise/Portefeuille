@@ -34,6 +34,7 @@ gem 'pry-rails'
 gem 'annotate'
 gem 'webpacker'
 gem 'react-rails'
+gem 'iex-ruby-client'
 ############################
 
 # Use ActiveStorage variant

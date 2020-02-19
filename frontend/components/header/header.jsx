@@ -6,16 +6,18 @@ import { connect } from 'react-redux';
 const Header = ({logout}) => {
     
     return (
-      <header>
-        <div className="inner-container">
-          <div className="logo">Portefeuille</div>
-          <ul className="nav">
-            <li>
-              <NavLink to="/stocks">Stocks</NavLink>
-              <NavLink to="/transactions">Transactions</NavLink>
-              <button onClick={logout}>Logout</button>
-            </li>
-          </ul>
+      <header className="header">
+        <div className="logo">Portefeuille</div>
+        <div className="nav">
+          <NavLink className="navlink" to="/stocks">
+            Stocks
+          </NavLink>
+          <NavLink className="navlink" to="/transactions">
+            Transactions
+          </NavLink>
+          <button className="navlink" onClick={logout}>
+            Logout
+          </button>
         </div>
       </header>
     );

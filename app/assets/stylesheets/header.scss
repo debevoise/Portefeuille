@@ -1,0 +1,54 @@
+@import 'app';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+    background-color: $orange;
+    border-bottom: 2px solid $red;
+    color: $red;
+
+    .logo {
+        padding: 10px;
+        font-size: 30px;
+        color: white;
+    }
+
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        width: 250px;
+        color: white;
+
+        .nav-link {
+            color: white;
+            cursor: pointer;
+        }
+
+        button.navlink {
+            cursor: pointer;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 3px;
+            background-color: $blue;
+            font-size: inherit;
+            font-family: inherit;
+        }
+    }
+
+    a {
+        display: block;
+        box-sizing: border-box;
+        height: 100%;
+        color: white;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+    }
+
+    a.active, a:hover {
+        border-bottom: 1px solid white;
+    }
+}
