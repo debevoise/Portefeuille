@@ -4,6 +4,8 @@ import Root from './components/root';
 import configureStore from './store/store'
 import { fetchUser, signupUser, loginUser } from './actions/user_actions';
 import $ from 'jquery';
+import { fetchStockPrice } from './util/market_api_util';
+import { fetchStockInformation, fetchMarketInformation } from './actions/market_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
@@ -39,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.loginUser = user => dispatch(loginUser(user));
 
     window.$ = $;
-
+    window.fetchStockInformation = fetchStockInformation;
+    window.fetchMarketInformation = fetchMarketInformation;
 
     ReactDOM.render(<Root store={store} />, root);
 

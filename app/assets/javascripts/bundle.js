@@ -107,6 +107,60 @@ var receiveErrors = function receiveErrors(errors) {
 
 /***/ }),
 
+/***/ "./frontend/actions/market_actions.js":
+/*!********************************************!*\
+  !*** ./frontend/actions/market_actions.js ***!
+  \********************************************/
+/*! exports provided: RECEIVE_STOCK_INFORMATION, RECEIVE_PORTFOLIO_INFORMATION, receiveStockInformation, receivePortfolioInformation, fetchStockInformation, fetchMarketInformation */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_STOCK_INFORMATION", function() { return RECEIVE_STOCK_INFORMATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PORTFOLIO_INFORMATION", function() { return RECEIVE_PORTFOLIO_INFORMATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveStockInformation", function() { return receiveStockInformation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receivePortfolioInformation", function() { return receivePortfolioInformation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockInformation", function() { return fetchStockInformation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMarketInformation", function() { return fetchMarketInformation; });
+/* harmony import */ var _util_market_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/market_api_util */ "./frontend/util/market_api_util.js");
+/* harmony import */ var _error_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./error_actions */ "./frontend/actions/error_actions.js");
+var RECEIVE_STOCK_INFORMATION = "RECEIVE_STOCK_INFORMATION";
+var RECEIVE_PORTFOLIO_INFORMATION = "RECEIVE_PORTFOLIO_INFORMATION";
+
+
+var receiveStockInformation = function receiveStockInformation(data) {
+  return {
+    type: RECEIVE_STOCK_INFORMATION,
+    data: data
+  };
+};
+var receivePortfolioInformation = function receivePortfolioInformation(data) {
+  return {
+    type: RECEIVE_PORTFOLIO_INFORMATION,
+    data: data
+  };
+};
+var fetchStockInformation = function fetchStockInformation(ticker) {
+  return function (dispatch) {
+    return _util_market_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchStockInfo"](ticker).then(function (data) {
+      return dispatch(receiveStockInformation(data));
+    }, function (errors) {
+      return dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_1__["receiveErrors"])([errors.responseText]));
+    });
+  };
+};
+var fetchMarketInformation = function fetchMarketInformation(tickerArray) {
+  return function (dispatch) {
+    return _util_market_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchMarketInfo"](tickerArray).then(function (data) {
+      return dispatch(receivePortfolioInformation(data));
+    }, function (errors) {
+      return dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_1__["receiveErrors"])([errors.responseText]));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/user_actions.js":
 /*!******************************************!*\
   !*** ./frontend/actions/user_actions.js ***!
@@ -721,6 +775,207 @@ var SignupContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"]
 
 /***/ }),
 
+/***/ "./frontend/components/stocks/buy_stock_container.js":
+/*!***********************************************************!*\
+  !*** ./frontend/components/stocks/buy_stock_container.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_market_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/market_actions */ "./frontend/actions/market_actions.js");
+/* harmony import */ var _buy_stock_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./buy_stock_form */ "./frontend/components/stocks/buy_stock_form.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+
+
+
+var msp = function msp(state) {
+  return {
+    market: state.market,
+    balance: state.user.balance
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    fetchStockInformation: function fetchStockInformation(ticker) {
+      return dispatch(Object(_actions_market_actions__WEBPACK_IMPORTED_MODULE_0__["fetchStockInformation"])(ticker));
+    }
+  };
+};
+
+var BuyStockContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(msp, mdp)(_buy_stock_form__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (BuyStockContainer);
+
+/***/ }),
+
+/***/ "./frontend/components/stocks/buy_stock_form.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/stocks/buy_stock_form.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BuyStockForm; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var BuyStockForm =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(BuyStockForm, _Component);
+
+  function BuyStockForm(props) {
+    var _this;
+
+    _classCallCheck(this, BuyStockForm);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(BuyStockForm).call(this, props));
+    _this.state = {
+      loaded: false,
+      ticker: "",
+      errors: [],
+      quantity: 0
+    };
+    _this.search = _this.search.bind(_assertThisInitialized(_this));
+    _this.updateQuantity = _this.updateQuantity.bind(_assertThisInitialized(_this));
+    _this.updateTicker = _this.updateTicker.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(BuyStockForm, [{
+    key: "updateTicker",
+    value: function updateTicker() {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState({
+          ticker: e.currentTarget.value.toUpperCase(),
+          loaded: false
+        });
+      };
+    }
+  }, {
+    key: "updateQuantity",
+    value: function updateQuantity() {
+      var _this3 = this;
+
+      return function (e) {
+        _this3.setState({
+          quantity: Math.floor(parseInt(e.currentTarget.value)) || 0
+        });
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      e.stopPropagation(); // this.props.login(this.state)
+    }
+  }, {
+    key: "search",
+    value: function search() {
+      var _this4 = this;
+
+      var ticker = this.state.ticker;
+      if (ticker.length === 0) return;
+      ticker = ticker.toUpperCase();
+      this.props.fetchStockInformation(ticker).then(function () {
+        return _this4.setState({
+          ticker: ticker,
+          loaded: true
+        });
+      });
+    }
+  }, {
+    key: "renderConfirmation",
+    value: function renderConfirmation() {
+      var _this$state = this.state,
+          ticker = _this$state.ticker,
+          loaded = _this$state.loaded,
+          quantity = _this$state.quantity;
+      var _this$props = this.props,
+          market = _this$props.market,
+          balance = _this$props.balance;
+      var buyShares = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.search
+      }, "Buy shares");
+      if (quantity <= 0) return buyShares;
+
+      if (!loaded && ticker in market) {
+        return buyShares;
+      } else if (!loaded) {
+        return buyShares;
+      }
+
+      var price = market[ticker].latestPrice;
+      var totalPrice = Math.ceil(price * quantity * 100) / 100;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "confirmation"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Confirm purchase ", quantity, " shares of ", ticker, " at ", price, "/share?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Total cost: $", totalPrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "confirm-button"
+      }, "Confirm"));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var balance = this.props.balance;
+      var _this$state2 = this.state,
+          quantity = _this$state2.quantity,
+          ticker = _this$state2.ticker;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "buy-stock-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Cash: $", balance), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "field"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "ticker"
+      }, "Quantity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        onChange: this.updateQuantity(),
+        value: quantity
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "field"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "user_email"
+      }, "Stock Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        onChange: this.updateTicker(),
+        value: ticker
+      })), this.renderConfirmation());
+    }
+  }]);
+
+  return BuyStockForm;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
 /***/ "./frontend/components/stocks/stocks.jsx":
 /*!***********************************************!*\
   !*** ./frontend/components/stocks/stocks.jsx ***!
@@ -733,6 +988,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Stocks; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _buy_stock_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./buy_stock_container */ "./frontend/components/stocks/buy_stock_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -753,6 +1009,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Stocks =
 /*#__PURE__*/
 function (_Component) {
@@ -767,7 +1024,9 @@ function (_Component) {
   _createClass(Stocks, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "Hello from Stocks");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "stock-container"
+      }, "Hello from Stocks", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_buy_stock_container__WEBPACK_IMPORTED_MODULE_1__["default"], null));
     }
   }]);
 
@@ -898,6 +1157,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _util_market_api_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./util/market_api_util */ "./frontend/util/market_api_util.js");
+/* harmony import */ var _actions_market_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./actions/market_actions */ "./frontend/actions/market_actions.js");
+
+
 
 
 
@@ -942,6 +1205,8 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   window.$ = jquery__WEBPACK_IMPORTED_MODULE_5___default.a;
+  window.fetchStockInformation = _actions_market_actions__WEBPACK_IMPORTED_MODULE_7__["fetchStockInformation"];
+  window.fetchMarketInformation = _actions_market_actions__WEBPACK_IMPORTED_MODULE_7__["fetchMarketInformation"];
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
   }), root);
@@ -984,6 +1249,45 @@ var errorsReducer = function errorsReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/market_reducer.js":
+/*!*********************************************!*\
+  !*** ./frontend/reducers/market_reducer.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_market_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/market_actions */ "./frontend/actions/market_actions.js");
+
+
+var marketReducer = function marketReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var data = action.data;
+  var newState;
+
+  switch (action.type) {
+    case _actions_market_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_STOCK_INFORMATION"]:
+      newState = Object.assign({}, state);
+      debugger;
+      newState[data.quote.symbol] = data.quote;
+      return newState;
+
+    case _actions_market_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PORTFOLIO_INFORMATION"]:
+      newState = Object.assign({}, state, data);
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (marketReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/root_reducer.js":
 /*!*******************************************!*\
   !*** ./frontend/reducers/root_reducer.js ***!
@@ -998,6 +1302,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _transactions_reducer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./transactions_reducer.js */ "./frontend/reducers/transactions_reducer.js");
 /* harmony import */ var _user_reducer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user_reducer.js */ "./frontend/reducers/user_reducer.js");
 /* harmony import */ var _errors_reducer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./errors_reducer.js */ "./frontend/reducers/errors_reducer.js");
+/* harmony import */ var _market_reducer_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./market_reducer.js */ "./frontend/reducers/market_reducer.js");
+
 
 
 
@@ -1007,7 +1313,8 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   stocks: _stocks_reducer_js__WEBPACK_IMPORTED_MODULE_1__["default"],
   transactions: _transactions_reducer_js__WEBPACK_IMPORTED_MODULE_2__["default"],
   user: _user_reducer_js__WEBPACK_IMPORTED_MODULE_3__["default"],
-  errors: _errors_reducer_js__WEBPACK_IMPORTED_MODULE_4__["default"]
+  errors: _errors_reducer_js__WEBPACK_IMPORTED_MODULE_4__["default"],
+  market: _market_reducer_js__WEBPACK_IMPORTED_MODULE_5__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -1029,7 +1336,6 @@ var stocksReducer = function stocksReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
-  var nextState = Object.assign({}, state);
 
   switch (action.type) {
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_USER"]:
@@ -1137,6 +1443,39 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/market_api_util.js":
+/*!******************************************!*\
+  !*** ./frontend/util/market_api_util.js ***!
+  \******************************************/
+/*! exports provided: fetchStockInfo, fetchMarketInfo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchStockInfo", function() { return fetchStockInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchMarketInfo", function() { return fetchMarketInfo; });
+function fetchStockInfo(ticker) {
+  var token = "/batch?types=quote&token=pk_b6f890a95fb24dbfb1a85f362fe5687f";
+  var baseUrl = "https://cloud.iexapis.com/stable/stock/";
+  var symbol = ticker.toLowerCase();
+  return $.ajax({
+    url: "".concat(baseUrl).concat(symbol).concat(token)
+  });
+}
+function fetchMarketInfo(tickerArray) {
+  var symbols = tickerArray.map(function (ticker) {
+    return ticker.toLowerCase();
+  }).join(',');
+  var end = "&types=quote&token=pk_b6f890a95fb24dbfb1a85f362fe5687f";
+  var baseUrl = "https://cloud.iexapis.com/stable/stock/market/batch?symbols=";
+  var url = "".concat(baseUrl).concat(symbols).concat(end);
+  return $.ajax({
+    url: url
+  });
+}
 
 /***/ }),
 

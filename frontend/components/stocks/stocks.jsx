@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import BuyStockContainer from "./buy_stock_container";
 
 export default class Stocks extends Component {
   render() {
-    return <section>Hello from Stocks</section>;
+    return <section className='stock-container'>
+      Hello from Stocks
+        <BuyStockContainer />
+      </section>;
   }
 }
