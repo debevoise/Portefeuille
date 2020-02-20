@@ -1,9 +1,24 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 export default class TransactionsIndex extends Component {
 
     componentDidMount() {
         this.props.fetchTransactions();
+    }
+
+    renderEmpty() {
+        return (
+          <div className="transactions-container empty-container">
+            <h1>Your portfolio</h1>
+            <div className="empty">
+              <p>No transactions yet...</p>
+              <p>
+                You can <Link to="/stocks">purchase stocks here</Link>.
+              </p>
+            </div>
+          </div>
+        );
     }
 
     render() {
@@ -16,6 +31,8 @@ export default class TransactionsIndex extends Component {
               </div>
             );
         }
+
+        if (Object.keys(transactions).length === 0) return this.renderEmpty();
 
         const formatDate = (dateString) => {
             let removedTime = dateString.split('T').shift();

@@ -1442,6 +1442,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TransactionsIndex; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1462,6 +1463,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var TransactionsIndex =
 /*#__PURE__*/
 function (_Component) {
@@ -1479,6 +1481,17 @@ function (_Component) {
       this.props.fetchTransactions();
     }
   }, {
+    key: "renderEmpty",
+    value: function renderEmpty() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "transactions-container empty-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "empty"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No transactions yet..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You can ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/stocks"
+      }, "purchase stocks here"), ".")));
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -1493,6 +1506,8 @@ function (_Component) {
           className: "loading"
         }, "Loading..."));
       }
+
+      if (Object.keys(transactions).length === 0) return this.renderEmpty();
 
       var formatDate = function formatDate(dateString) {
         var removedTime = dateString.split('T').shift();

@@ -132,7 +132,8 @@
     display: flex;
     flex-direction: column;
     margin: 0 10px;
-    
+    min-width: 380px;
+
     footer {
         width: inherit;
         flex-shrink: 1;
