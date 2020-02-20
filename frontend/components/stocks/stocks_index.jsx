@@ -88,7 +88,7 @@ export default class StocksIndex extends Component {
               </thead>
               <tbody>{stockList}</tbody>
             </table>
-            <footer>Total market value: ${totalValue}</footer>
+            <footer>Total market value: ${Math.ceil(totalValue * 100) / 100}</footer>
           </div>
         );
     }
