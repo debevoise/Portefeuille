@@ -12,7 +12,7 @@
 .registration {
     display: flex;
     flex-direction: column;
-
+    box-shadow: 5px 5px 5px $purple;
     max-width: 70%;
     width: 80%;
     min-height: 60%;
@@ -70,17 +70,19 @@
         width: 100%;
         font-size: 15px;
         font-family: $serif;
-
+        outline: none;
+        border: 2px solid transparent;
+        color: $purple;
     }
 
     input:focus {
         outline: none;
-        border: 1px solid $orange;
+        border: 2px solid $darkred;
     }
 
     .errors-list {
         font-size: 15px;
-        color: $red;
+        color: $darkred;
         font-style: italic;
         li {
             margin-bottom: 2px;
