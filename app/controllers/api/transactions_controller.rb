@@ -7,7 +7,12 @@ class Api::TransactionsController < ApplicationController
     end
 
     def buy
-        @transaction = current_user.buy_stock
+        debugger
+        @transaction = current_user.buy_stock(
+            params[:transaction][:ticker],
+            params[:transaction][:unit_price].to_i,
+            params[:transaction][:quantity].to_i,
+        )
 
         if @transaction
         else

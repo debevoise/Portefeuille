@@ -9,11 +9,12 @@ const marketReducer = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_STOCK_INFORMATION:
             newState = Object.assign({}, state);
-            debugger
             newState[data.quote.symbol] = data.quote;
             return newState;
         case RECEIVE_PORTFOLIO_INFORMATION:
-            newState = Object.assign({}, state, data);
+            let formattedData = {};
+            Object.keys(data).forEach(ticker => formattedData[ticker] = data[ticker].quote) 
+            newState = Object.assign({}, state, formattedData);
             return newState;
         default:
             return state;

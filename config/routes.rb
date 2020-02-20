@@ -7,15 +7,15 @@ Rails.application.routes.draw do
 
   authenticated do
     namespace :api, defaults: { format: :json } do
-      resources :transactions, only: :index do
-        collection do
-          post :buy, to: 'transactions#buy', as: 'buy'
-          post :sell, to: 'transactions#sell', as: 'sell'
-        end
-      end
+      resources :transactions, only: :index 
 
       resource :user, only: :show
-      resources :stocks, only: :index
+      resources :stocks, only: :index do
+        collection do
+          post :buy, to: 'stocks#buy', as: 'buy'
+          post :sell, to: 'stocks#sell', as: 'sell'
+        end
+      end
     end
   end
 

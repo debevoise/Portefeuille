@@ -24,11 +24,15 @@ class User < ApplicationRecord
 	has_many :transactions, dependent: :destroy
 	has_many :stocks, through: :transactions
 
-	def buy_stock(ticker, quantity, unit_price)
+	def buy_stock(ticker, company, unit_price, quantity)
 		stock = Stock.find_by_ticker(ticker)
-		return false if !stock 
+		if !stock 
+			stock = Stock.new(ticker: ticker, company: company)
+			stock.save!
+		end
 
-		return sell_stock(ticker, quantity, unit_price) if quantity < 0
+
+		# return sell_stock(ticker, quantity, unit_price) if quantity < 0
 
 		if self.balance >= quantity * unit_price
 			transaction = self.transactions.new({
@@ -37,7 +41,7 @@ class User < ApplicationRecord
 				quantity: quantity 
 			})
 
-			if transaction.valid? 
+			if transaction.valid?
 				self.balance = self.balance - (quantity * unit_price)
 				transaction.save
 				self.save

@@ -1,6 +1,7 @@
 import { fetchStockInformation } from "../../actions/market_actions";
 import BuyStockForm from "./buy_stock_form";
 import { connect } from "react-redux";
+import { buyStock } from "../../actions/transaction_actions";
 
 const msp = state => ({
     market: state.market,
@@ -8,8 +9,10 @@ const msp = state => ({
 });
 
 const mdp = dispatch => ({
-    fetchStockInformation: ticker => dispatch(fetchStockInformation(ticker))
-})
+  fetchStockInformation: ticker => dispatch(fetchStockInformation(ticker)),
+  buyStock: (ticker, company, unit_price, quantity) =>
+    dispatch(buyStock(ticker, company, unit_price, quantity))
+});
 
 const BuyStockContainer = connect(msp, mdp)(BuyStockForm);
 export default BuyStockContainer;
