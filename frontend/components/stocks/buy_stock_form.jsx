@@ -85,7 +85,7 @@ export default class BuyStockForm extends Component {
                 <button 
                     className='confirm-button' 
                     onClick={this.handleSubmit}>Confirm</button>
-                <p>Confirm purchase of {quantity} share{quantity === 1 ? "" : "s"} of {ticker} at ${price}/share?</p>
+                <p>Purchase {quantity} share{quantity === 1 ? "" : "s"} of {ticker} at ${price}/share?</p>
                 <p>Total cost: ${totalPrice}</p>
             </div>
         )
@@ -96,8 +96,20 @@ export default class BuyStockForm extends Component {
         let { quantity, ticker } = this.state;
         return (
           <div className="buy-stock-container">
-            <h2>Cash: ${balance}</h2>
+            <h1>Cash: ${Math.ceil(balance * 100) / 100}</h1>
+            <div className='howto'>
+                Search for stocks by symbol (e.g. 'AAPL') and pay with your cash balance.
+            </div>
             <form className="buy-stock" onSubmit={e => e.preventDefault()}>
+              <div className="field">
+                <label htmlFor="user_email">Stock Ticker</label>
+                <br />
+                <input
+                  type="text"
+                  onChange={this.updateTicker()}
+                  value={ticker}
+                />
+              </div>
               <div className="field">
                 <label htmlFor="ticker">Quantity</label>
                 <br />
@@ -106,15 +118,6 @@ export default class BuyStockForm extends Component {
                   pattern="[0-9]*"
                   onChange={this.updateQuantity()}
                   value={quantity}
-                />
-              </div>
-              <div className="field">
-                <label htmlFor="user_email">Stock Ticker</label>
-                <br />
-                <input
-                  type="text"
-                  onChange={this.updateTicker()}
-                  value={ticker}
                 />
               </div>
               {this.renderConfirmation()}

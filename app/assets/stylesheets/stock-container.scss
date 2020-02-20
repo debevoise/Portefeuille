@@ -1,0 +1,117 @@
+@import 'app';
+
+.stock-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+
+    h1 {
+        text-align: center;
+        font-size: 26px;
+        font-weight: 700;
+        padding-bottom: 10px;
+        margin: 20px 0;
+    }
+
+
+
+    th.gain {
+        color: rgb(2, 128, 2);
+    }
+
+    th.loss {
+        color: $red;
+    }
+}
+
+.buy-stock-container {
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    
+}
+
+.buy-stock {
+    // width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid $purple;
+    border-radius: 10px;
+    color: $purple;
+
+    button {
+        margin: 12px auto;
+        cursor: pointer;
+        color: $orange;
+        padding: 6px 11px;
+        border: 0px solid transparent;
+        border-radius: 5px;
+        transition: 300ms;
+        background-color: $darkred;
+        font-size: inherit;
+        font-family: inherit;
+    }
+
+    button:hover {
+        background-color: $red;
+        color: $purple;
+        transform: scale(1.1);
+        transition: 300ms;
+    }
+
+
+}
+
+.buy-stock .field {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+
+    input {
+        width: 40%;
+        background-color:transparent;
+        color: $purple;
+        font-family: $serif;
+        border: 2px solid $purple;
+        border-radius: 3px;
+        padding: 5px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 800;
+    }
+
+    input:focus {
+        outline: none;
+        border: 2px solid $darkred;
+    }
+
+
+}
+
+.confirmation, .invalid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 1;
+
+    p {
+        display: block;
+        word-wrap: normal;
+        padding: 5px 0;
+        color: $darkred;
+    }
+
+    button {
+        display: block;
+        margin-bottom: 10px;
+    }
+}

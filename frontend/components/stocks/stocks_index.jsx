@@ -55,7 +55,7 @@ export default class StocksIndex extends Component {
                 <tr>
                     <th>Ticker</th>
                     <th>Company</th>
-                    <th>Quantity</th>
+                    <th>Shares</th>
                     <th>Price</th>
                     <th>Gains</th>
                 </tr>

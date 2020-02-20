@@ -1061,7 +1061,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "confirm-button",
         onClick: this.handleSubmit
-      }, "Confirm"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Confirm purchase of ", quantity, " share", quantity === 1 ? "" : "s", " of ", ticker, " at $", price, "/share?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Total cost: $", totalPrice));
+      }, "Confirm"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Purchase ", quantity, " share", quantity === 1 ? "" : "s", " of ", ticker, " at $", price, "/share?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Total cost: $", totalPrice));
     }
   }, {
     key: "render",
@@ -1072,12 +1072,22 @@ function (_Component) {
           ticker = _this$state3.ticker;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "buy-stock-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Cash: $", balance), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Cash: $", Math.ceil(balance * 100) / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "howto"
+      }, "Search for stocks by symbol (e.g. 'AAPL') and pay with your cash balance."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "buy-stock",
         onSubmit: function onSubmit(e) {
           return e.preventDefault();
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "field"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "user_email"
+      }, "Stock Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        onChange: this.updateTicker(),
+        value: ticker
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "field"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "ticker"
@@ -1086,14 +1096,6 @@ function (_Component) {
         pattern: "[0-9]*",
         onChange: this.updateQuantity(),
         value: quantity
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "field"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "user_email"
-      }, "Stock Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        onChange: this.updateTicker(),
-        value: ticker
       })), this.renderConfirmation()));
     }
   }]);
@@ -1263,7 +1265,7 @@ function (_Component) {
         className: "stocks-index-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "stock-list"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Company"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Quantity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Gains"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, stockList)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Company"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Shares"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Gains"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, stockList)));
     }
   }]);
 

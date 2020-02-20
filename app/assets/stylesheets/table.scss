@@ -1,0 +1,22 @@
+@import 'app';
+
+table {
+    width: 100%;
+}
+
+thead {
+    color: $darkred;
+    font-style: italic;
+    height: auto;
+    margin-bottom: 5px;
+
+    tr {
+        border-bottom: 1px solid $purple;
+    }
+}
+
+th {
+    padding-right: 10px;
+    text-align: left;
+    padding: 3px 10px 3px 0px;
+}    
