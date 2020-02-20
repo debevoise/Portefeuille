@@ -3,7 +3,7 @@
 .splash-container {
     height: 100%;
     width: 100%;
-    background-image: linear-gradient($blue, $purple);
+    background-image: linear-gradient(rgb(106, 69, 194), $purple);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,7 +12,7 @@
 .splash {
     display: flex;
     flex-direction: column;
-
+    box-shadow: 5px 5px 5px $purple;
     max-width: 70%;
     width: 80%;
     min-height: 60%;
@@ -20,13 +20,13 @@
     box-sizing: border-box;
     padding: 30px;
     border-radius: 10px;
-    background-color: white;
-    color: $blue;
+    background-color: $orange;
+    color: $purple;
     font-size: 20px;
 
     h1 {
         margin: 10px 0;
-        color: $blue;
+        color: $purple;
         font-size: 50px;
         padding-bottom: 10px;
         border-bottom: 1px dashed $blue;
@@ -44,11 +44,13 @@
     }
 
     a {
-        color: $orange;
+        color: $blue;
+        transition: 200ms;
     }
 
     a:hover {
-        color: $red;
+        transition: 200ms;
+        color: $darkred;
     }
 
     .nav-container {
@@ -71,14 +73,14 @@
                 border-radius: 5px;
                 color: white;
                 padding: 10px;
-                background-color: $orange;
+                background-color: $darkred;
                 transition: 200ms;
                 text-decoration: none;
             }
 
             a:hover {
                 transform: scale(1.1);
-                background-color: $red;
+                background-color: $purple;
                 transition: 200ms;
             }
         }
