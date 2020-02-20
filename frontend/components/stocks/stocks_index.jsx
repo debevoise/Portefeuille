@@ -32,11 +32,18 @@ export default class StocksIndex extends Component {
         if (stocks.length === 0) {
           return this.renderEmpty();
         }
+        let totalValue = 0;
 
         let hasMarketPrice = true;
         let stockList = stocks.map((stock) => {
             let {ticker, company, quantity, price, gains} = stock;
-            if (!('price' in stock)) hasMarketPrice = false;
+
+            if (!('price' in stock)) {
+              hasMarketPrice = false
+            } else {
+              totalValue += quantity * price;
+            }
+
             let formattedGains;
             let gainsClass = 'neutral';
             if (typeof gains === 'undefined') {
@@ -81,7 +88,7 @@ export default class StocksIndex extends Component {
               </thead>
               <tbody>{stockList}</tbody>
             </table>
-            
+            <footer>Total market value: ${totalValue}</footer>
           </div>
         );
     }

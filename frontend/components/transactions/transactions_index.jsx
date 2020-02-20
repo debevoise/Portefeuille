@@ -73,7 +73,7 @@ export default class TransactionsIndex extends Component {
               <tbody>{transactionList}</tbody>
             </table>
             <footer>
-              Remaining balance: ${balance}
+              Remaining balance: ${Math.ceil(balance * 100) / 100}
             </footer>
           </section>
         );

@@ -7,7 +7,7 @@ export default class BuyStockForm extends Component {
         this.defaultState = {
             loaded: false,
             ticker: "",
-            errors: [],
+            hasErrors: false,
             quantity: 0,
         }
 
@@ -51,11 +51,13 @@ export default class BuyStockForm extends Component {
     search() {
         let {ticker} = this.state;
         
-
         if (ticker.length === 0) return;
         ticker = ticker.toUpperCase();
-        this.props.fetchStockInformation(ticker)
-            .then(() => this.setState({ ticker, loaded: true }))
+
+        this.props
+          .fetchStockInformation(ticker)
+          .then(() => this.setState({ ticker, loaded: true, hasErrors: false }))
+          .fail(() => this.setState({ hasErrors: true }));
     }
 
     renderConfirmation() {
@@ -92,8 +94,11 @@ export default class BuyStockForm extends Component {
     }
 
     render() {
-        let { balance } = this.props;
+        let { balance,errors } = this.props;
         let { quantity, ticker } = this.state;
+        let errorMessage = null;
+        if (errors.length === 1) errorMessage = <p className='error'>Could not find stock with that symbol</p>; 
+
         return (
           <div className="buy-stock-container">
             <h1>Cash: ${Math.ceil(balance * 100) / 100}</h1>
@@ -120,6 +125,7 @@ export default class BuyStockForm extends Component {
                   value={quantity}
                 />
               </div>
+              {errorMessage}
               {this.renderConfirmation()}
             </form>
           </div>

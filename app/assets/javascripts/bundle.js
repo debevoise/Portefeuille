@@ -932,6 +932,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state) {
   return {
+    errors: state.errors,
     market: state.market,
     balance: state.user.balance
   };
@@ -999,7 +1000,7 @@ function (_Component) {
     _this.defaultState = {
       loaded: false,
       ticker: "",
-      errors: [],
+      hasErrors: false,
       quantity: 0
     };
     _this.state = _this.defaultState;
@@ -1062,7 +1063,12 @@ function (_Component) {
       this.props.fetchStockInformation(ticker).then(function () {
         return _this5.setState({
           ticker: ticker,
-          loaded: true
+          loaded: true,
+          hasErrors: false
+        });
+      }).fail(function () {
+        return _this5.setState({
+          hasErrors: true
         });
       });
     }
@@ -1106,10 +1112,16 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var balance = this.props.balance;
+      var _this$props2 = this.props,
+          balance = _this$props2.balance,
+          errors = _this$props2.errors;
       var _this$state3 = this.state,
           quantity = _this$state3.quantity,
           ticker = _this$state3.ticker;
+      var errorMessage = null;
+      if (errors.length === 1) errorMessage = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "error"
+      }, "Could not find stock with that symbol");
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "buy-stock-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Cash: $", Math.ceil(balance * 100) / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1136,7 +1148,7 @@ function (_Component) {
         pattern: "[0-9]*",
         onChange: this.updateQuantity(),
         value: quantity
-      })), this.renderConfirmation()));
+      })), errorMessage, this.renderConfirmation()));
     }
   }]);
 
@@ -1283,6 +1295,7 @@ function (_Component) {
         return this.renderEmpty();
       }
 
+      var totalValue = 0;
       var hasMarketPrice = true;
       var stockList = stocks.map(function (stock) {
         var ticker = stock.ticker,
@@ -1290,7 +1303,13 @@ function (_Component) {
             quantity = stock.quantity,
             price = stock.price,
             gains = stock.gains;
-        if (!('price' in stock)) hasMarketPrice = false;
+
+        if (!('price' in stock)) {
+          hasMarketPrice = false;
+        } else {
+          totalValue += quantity * price;
+        }
+
         var formattedGains;
         var gainsClass = 'neutral';
 
@@ -1321,7 +1340,7 @@ function (_Component) {
         className: "stocks-index-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "stock-list"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Company"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Shares"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Gains*"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, stockList)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Company"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Shares"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Gains*"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, stockList)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, "Total market value: $", totalValue));
     }
   }]);
 
@@ -1549,7 +1568,7 @@ function (_Component) {
         className: "transactions-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Transaction Ledger"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "transaction-list"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Company"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Quantity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Date"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, transactionList)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, "Remaining balance: $", balance));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Company"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Quantity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Date"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, transactionList)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, "Remaining balance: $", Math.ceil(balance * 100) / 100));
     }
   }]);
 
@@ -1736,6 +1755,10 @@ document.addEventListener('DOMContentLoaded', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_error_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/error_actions */ "./frontend/actions/error_actions.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_transaction_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/transaction_actions */ "./frontend/actions/transaction_actions.js");
+/* harmony import */ var _actions_market_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/market_actions */ "./frontend/actions/market_actions.js");
+
+
 
 
 
@@ -1749,6 +1772,9 @@ var errorsReducer = function errorsReducer() {
       return action.errors;
 
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_USER"]:
+    case _actions_transaction_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_TRANSACTIONS"]:
+    case _actions_transaction_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_RECEIPT"]:
+    case _actions_market_actions__WEBPACK_IMPORTED_MODULE_3__["RECEIVE_STOCK_INFORMATION"]:
       return [];
 
     default:

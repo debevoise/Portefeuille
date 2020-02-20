@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { buyStock } from "../../actions/transaction_actions";
 
 const msp = state => ({
+    errors: state.errors,
     market: state.market,
     balance: state.user.balance
 });

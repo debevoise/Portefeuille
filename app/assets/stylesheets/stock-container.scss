@@ -79,6 +79,12 @@
         background-color: gray;
     }
 
+    .error {
+        text-align: center;
+        color: $darkred;
+        font-size: 13px;
+    }
+
 
 
 
@@ -141,11 +147,12 @@
     margin: 0 10px;
     min-width: 380px;
 
+
     footer {
-        width: inherit;
-        flex-shrink: 1;
-        font-size: 13px;
-        color: $red;
+        text-align: center;
+        color: $darkred;
+        font-size: 17px;
+        margin-top: 20px;
     }
 }
 
