@@ -5,7 +5,7 @@ $red: #d6623f;
 $darkred: #942727;
 $blue: #3e4aeb;
 $green: #db613c;
-$purple: hsl(278, 100%, 18%);
+$purple: hsl(278, 97%, 14%);
 
 $serif: 'Libre Baskerville', serif;
 $sans: 'IBM Plex Sans', sans-serif;
@@ -14,12 +14,28 @@ body {
     background-color: #dfc1b8;
     color: $purple;
     font-family: $serif;
+    min-width: 700px;
 }
 
 html, body, #root {
     height: 100%;
     width: 100%;
     box-sizing: border-box;
+}
+
+button:focus {
+    outline: none;
+}
+
+.main-view {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    flex-grow: 1;
+
+    section {
+        flex-grow: 1;
+    }
 }
 
 

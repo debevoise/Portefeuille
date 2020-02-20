@@ -73,7 +73,7 @@ export default class BuyStockForm extends Component {
         if (totalPrice > balance) {
             return (
                 <div className='invalid'>
-                    <button className='invalid-button'>Buy stock</button>
+                    <button className='invalid-button'>Buy shares</button>
                     <p>Insufficient funds.</p>
                     <p>Total cost: ${totalPrice}</p>
                 </div>

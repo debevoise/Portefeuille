@@ -334,6 +334,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _welcome_splash__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./welcome/splash */ "./frontend/components/welcome/splash.jsx");
 /* harmony import */ var _session_login_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./session/login_container */ "./frontend/components/session/login_container.js");
 /* harmony import */ var _session_signup_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./session/signup_container */ "./frontend/components/session/signup_container.js");
+/* harmony import */ var _header_footer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./header/footer */ "./frontend/components/header/footer.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -351,6 +352,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -397,7 +399,9 @@ function (_React$Component) {
         }));
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_header__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
+        className: "main-view"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_header__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
         path: "/transactions",
         component: _transactions_transactions__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -408,7 +412,7 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
         from: "/",
         to: "/stocks"
-      })));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_header_footer__WEBPACK_IMPORTED_MODULE_11__["default"], null));
     }
   }]);
 
@@ -423,6 +427,41 @@ var msp = function msp(state) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["connect"])(msp)(App));
+
+/***/ }),
+
+/***/ "./frontend/components/header/footer.jsx":
+/*!***********************************************!*\
+  !*** ./frontend/components/header/footer.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var Footer = function Footer() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", {
+    className: "footer"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "* Data provided by", " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    target: "_blank",
+    rel: "noreferrer noopener",
+    href: "https://iexcloud.io"
+  }, "IEX Cloud"), ". Gains are calculated on % difference between a stock's current market price and its price at the previous market close."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Portefeuille is a project by", " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.simondebevoise.com/",
+    target: "_blank",
+    rel: "noopener"
+  }, "Simon DeBevoise"), ". See it", " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "https://www.github.com/debevoise/Portefeuille",
+    target: "_blank",
+    rel: "noopener"
+  }, "on Github"), "."));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Footer);
 
 /***/ }),
 
@@ -1054,7 +1093,7 @@ function (_Component) {
           className: "invalid"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "invalid-button"
-        }, "Buy stock"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Insufficient funds."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Total cost: $", totalPrice));
+        }, "Buy shares"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Insufficient funds."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Total cost: $", totalPrice));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1380,7 +1419,7 @@ function (_Component) {
   _createClass(Transactions, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_transactions_index_container__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_transactions_index_container__WEBPACK_IMPORTED_MODULE_1__["default"], null);
     }
   }]);
 
@@ -1444,7 +1483,8 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           transactions = _this$props.transactions,
-          stocks = _this$props.stocks;
+          stocks = _this$props.stocks,
+          balance = _this$props.balance;
 
       if (!stocks || !transactions) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1454,23 +1494,31 @@ function (_Component) {
         }, "Loading..."));
       }
 
+      var formatDate = function formatDate(dateString) {
+        var removedTime = dateString.split('T').shift();
+        var timeArr = removedTime.split('-');
+        timeArr.push(timeArr.shift());
+        return timeArr.join('/');
+      };
+
       var transactionList = transactions.map(function (trans) {
         var unit_price = trans.unit_price,
             quantity = trans.quantity,
-            stock_id = trans.stock_id;
+            stock_id = trans.stock_id,
+            date = trans.date;
         var _stocks$stock_id = stocks[stock_id],
             company = _stocks$stock_id.company,
             ticker = _stocks$stock_id.ticker;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           className: "transaction-row",
           key: trans.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, ticker), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, company), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "$", unit_price));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, ticker), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, company), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, quantity, " share", quantity === 1 ? '' : 's'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "$", unit_price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, formatDate(date)));
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "transactions-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Transaction Ledger"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: "transaction-list"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Company"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Quantity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Price"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, transactionList)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Company"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Quantity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Date"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, transactionList)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, "Remaining balance: $", balance));
     }
   }]);
 
@@ -1499,10 +1547,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(_ref) {
   var transactions = _ref.transactions,
-      stocks = _ref.stocks;
+      stocks = _ref.stocks,
+      user = _ref.user;
   return {
     transactions: Object.values(transactions),
-    stocks: stocks
+    stocks: stocks,
+    balance: Math.ceil(user.balance * 100) / 100
   };
 };
 
@@ -1539,7 +1589,7 @@ var Splash = function Splash() {
     className: "splash-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "splash"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Portefeuille"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Your stocks. Organized."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "A fullstack app completed for NY Tech Talent Pipeline's coding challenge. Portefeuille uses Ruby on Rails in the backend, Devise for user authentication, as well as React and Redux for frontend management. Realtime stock market data provided by ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Portefeuille"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Your stocks. Organized."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "A fullstack app completed for NY Tech Talent Pipeline's coding challenge. Portefeuille is hosted on Heroku and uses Ruby on Rails on the backend, Devise for user authentication, as well as React and Redux for frontend management. Realtime stock market data provided by ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://iexcloud.io"
   }, "IEX Cloud"), ". Developed by", " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.simondebevoise.com/",

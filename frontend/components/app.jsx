@@ -9,6 +9,7 @@ import SignupForm from './session/signup';
 import Splash from './welcome/splash';
 import LoginContainer from './session/login_container';
 import SignupContainer from './session/signup_container';
+import Footer from './header/footer';
 
 class App extends React.Component {
     
@@ -25,13 +26,14 @@ class App extends React.Component {
         }
 
         return (
-            <main>
+            <main className='main-view'>
                 <Header />
                 <Switch>
                     <Route exact path="/transactions" component={Transactions} />
                     <Route exact path="/stocks" component={Stocks} />
                     <Redirect from="/" to="/stocks" />
                 </Switch>
+                <Footer />
             </main>
         );
     }

@@ -3,7 +3,8 @@
 .stock-container {
     display: flex;
     justify-content: space-evenly;
-    margin: auto;
+    padding: 20px 0;
+    min-height: 430px;
 
     h1 {
         text-align: center;
@@ -31,7 +32,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    
     
 }
 
@@ -40,12 +41,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    box-shadow: 0px 0px 8px $darkred;
     padding: 20px;
     margin: 10px;
     border: 2px solid $purple;
     border-radius: 10px;
     color: $purple;
+    background-color: $orange;
 
     button {
         margin: 12px auto;
@@ -67,7 +69,6 @@
     }
 
     .confirm-button:hover {
-        background-color: $red;
         color: $purple;
         transform: scale(1.1);
         transition: 300ms;
@@ -86,7 +87,7 @@
 
     input {
         width: 40%;
-        background-color:transparent;
+        background-color: #dfc1b8;
         color: $purple;
         font-family: $serif;
         border: 2px solid $purple;
@@ -128,8 +129,13 @@
 }
 
 .stocks-index-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    
     footer {
-        max-width: 100%;
+        width: inherit;
+        flex-shrink: 1;
         font-size: 13px;
         color: $red;
     }
