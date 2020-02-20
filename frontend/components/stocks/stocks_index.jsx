@@ -24,7 +24,8 @@ export default class StocksIndex extends Component {
             if (typeof gains === 'undefined') {
                 formattedGains = '...'
             } else {
-                formattedGains = gains < 0 ? '-%' + gains : '%' + gains
+                
+                formattedGains = gains < 0 ? '-%' + Math.abs(gains) : ' %' + gains;
                 if (gains < 0) gainsClass = 'loss';
                 if (gains > 0) gainsClass = 'gain';
             }
@@ -53,17 +54,28 @@ export default class StocksIndex extends Component {
             <table className="stock-list">
               <thead>
                 <tr>
-                    <th>Ticker</th>
-                    <th>Company</th>
-                    <th>Shares</th>
-                    <th>Price</th>
-                    <th>Gains</th>
+                  <th>Ticker</th>
+                  <th>Company</th>
+                  <th>Shares</th>
+                  <th>Price</th>
+                  <th>Gains*</th>
                 </tr>
               </thead>
-              <tbody>
-                {stockList}
-              </tbody>
+              <tbody>{stockList}</tbody>
             </table>
+            {/* <footer>
+              * Gains are calculated on percent increase between current market
+              price and previous the stock's price at the previous market's
+              close. IEX's market api limits access to day-of market information
+              for{" "}
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                href="https://intercom.help/iexcloud/en/articles/3210401-how-do-i-get-nasdaq-listed-stock-data-utp-data-on-iex-cloud"
+              >
+                NASDAQ listed stocks
+              </a>.
+            </footer> */}
           </div>
         );
     }

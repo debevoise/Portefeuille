@@ -61,7 +61,7 @@ export default class BuyStockForm extends Component {
     renderConfirmation() {
         let {ticker, loaded, quantity} = this.state;
         let {market, balance} = this.props;
-        let buyShares = <button onClick={this.search}>Buy shares</button>
+        let buyShares = <button className='confirm-button' onClick={this.search}>Buy shares</button>
 
         if (!(loaded && ticker in market && quantity > 0)) {
           return buyShares;
