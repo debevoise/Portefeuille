@@ -8,9 +8,12 @@ const Splash = () => (
       <h2>Your stocks. Organized.</h2>
       <p>
         A fullstack app completed for NY Tech Talent Pipeline's coding
-        challenge. Portefeuille is hosted on Heroku and uses Ruby on Rails on the backend, Devise for
-        user authentication, as well as React and Redux for frontend management.
-        Realtime stock market data provided by <a href="https://iexcloud.io">IEX Cloud</a>. 
+        challenge. Portefeuille is hosted on Heroku and uses Ruby on Rails on
+        the backend, Devise for user authentication, as well as React and Redux
+        for frontend management. Realtime stock market data provided by{" "}
+        <a href="https://iexcloud.io">IEX Cloud</a>.
+      </p>
+      <p className='madeby'>
         Developed by{" "}
         <a
           href="https://www.simondebevoise.com/"

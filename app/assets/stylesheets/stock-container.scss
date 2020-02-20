@@ -74,6 +74,13 @@
         transition: 300ms;
     }
 
+    .invalid-button {
+        cursor: not-allowed;
+        background-color: gray;
+    }
+
+
+
 
 }
 
@@ -142,11 +149,5 @@
     }
 }
 
-.invalid-button {
-    cursor: not-allowed;
-    background-color: $orange;
-}
 
-.invalid-button:hover {
 
-}
