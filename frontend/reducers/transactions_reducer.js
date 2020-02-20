@@ -6,7 +6,7 @@ const transactionsReducer = (state = {}, action) => {
     let nextState = Object.assign({}, state);
     switch (action.type) {
         case RECEIVE_TRANSACTIONS:
-            return action.payload;
+            return action.payload.transactions;
         case RECEIVE_RECEIPT:
             let {transaction} = action.payload;
             nextState[transaction.id] = transaction;

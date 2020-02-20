@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  # prepend_before_filter :require_no_authentication, :only => [:create ]
+
 
   # POST /users/sign_in
   def create
     @user = User.find_by_email(params[:user][:email])
     
     if @user && @user.valid_password?(params[:user][:password])
-      # sign_in("user", resource)
       sign_in(@user)
       @stocks = @user
             .transactions

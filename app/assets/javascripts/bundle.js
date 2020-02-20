@@ -1227,7 +1227,6 @@ function (_Component) {
         if (tickerArr.length > 0) this.props.fetchMarketInformation(tickerArr);
       }
 
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "stocks-index-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
@@ -1310,6 +1309,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Transactions; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _transactions_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./transactions_index_container */ "./frontend/components/transactions/transactions_index_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1330,6 +1330,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Transactions =
 /*#__PURE__*/
 function (_Component) {
@@ -1344,7 +1345,7 @@ function (_Component) {
   _createClass(Transactions, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "Hello from transactions");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_transactions_index_container__WEBPACK_IMPORTED_MODULE_1__["default"], null));
     }
   }]);
 
@@ -1352,6 +1353,134 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
+
+/***/ }),
+
+/***/ "./frontend/components/transactions/transactions_index.jsx":
+/*!*****************************************************************!*\
+  !*** ./frontend/components/transactions/transactions_index.jsx ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TransactionsIndex; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var TransactionsIndex =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(TransactionsIndex, _Component);
+
+  function TransactionsIndex() {
+    _classCallCheck(this, TransactionsIndex);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(TransactionsIndex).apply(this, arguments));
+  }
+
+  _createClass(TransactionsIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchTransactions();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          transactions = _this$props.transactions,
+          stocks = _this$props.stocks;
+
+      if (!stocks || !transactions) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "transactions-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "loading"
+        }, "Loading..."));
+      }
+
+      var transactionList = transactions.map(function (trans) {
+        var unit_price = trans.unit_price,
+            quantity = trans.quantity,
+            stock_id = trans.stock_id;
+        var _stocks$stock_id = stocks[stock_id],
+            company = _stocks$stock_id.company,
+            ticker = _stocks$stock_id.ticker;
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          className: "transaction-row",
+          key: trans.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, ticker), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, company), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "$", unit_price));
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "transactions-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Transaction Ledger"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "transaction-list"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Ticker"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Company"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Quantity"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Price"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, transactionList)));
+    }
+  }]);
+
+  return TransactionsIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./frontend/components/transactions/transactions_index_container.js":
+/*!**************************************************************************!*\
+  !*** ./frontend/components/transactions/transactions_index_container.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_transaction_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/transaction_actions */ "./frontend/actions/transaction_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _transactions_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./transactions_index */ "./frontend/components/transactions/transactions_index.jsx");
+
+
+
+
+var msp = function msp(_ref) {
+  var transactions = _ref.transactions,
+      stocks = _ref.stocks;
+  return {
+    transactions: Object.values(transactions),
+    stocks: stocks
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    fetchTransactions: function fetchTransactions() {
+      return dispatch(Object(_actions_transaction_actions__WEBPACK_IMPORTED_MODULE_0__["fetchTransactions"])());
+    }
+  };
+};
+
+var TransactionsIndexContainer = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(_transactions_index__WEBPACK_IMPORTED_MODULE_2__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (TransactionsIndexContainer);
 
 /***/ }),
 
@@ -1614,6 +1743,7 @@ var stocksReducer = function stocksReducer() {
       return action.payload.stocks || state;
 
     case _actions_transaction_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_RECEIPT"]:
+    case _actions_transaction_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_TRANSACTIONS"]:
       return action.payload.stocks;
 
     default:
@@ -1647,7 +1777,7 @@ var transactionsReducer = function transactionsReducer() {
 
   switch (action.type) {
     case _actions_transaction_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_TRANSACTIONS"]:
-      return action.payload;
+      return action.payload.transactions;
 
     case _actions_transaction_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_RECEIPT"]:
       var transaction = action.payload.transaction;

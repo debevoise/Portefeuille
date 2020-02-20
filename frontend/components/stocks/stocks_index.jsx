@@ -46,7 +46,6 @@ export default class StocksIndex extends Component {
               this.props.fetchMarketInformation(tickerArr);
         }
 
-        debugger
         return (
           <div className="stocks-index-container">
             <h1>Your portfolio</h1>

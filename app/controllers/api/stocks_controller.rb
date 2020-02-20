@@ -16,7 +16,7 @@ class Api::StocksController < ApplicationController
         @transaction = current_user.buy_stock(
             transaction_params[:ticker],
             transaction_params[:company],
-            transaction_params[:unit_price].to_i,
+            transaction_params[:unit_price].to_f,
             transaction_params[:quantity].to_i,
         )
 
