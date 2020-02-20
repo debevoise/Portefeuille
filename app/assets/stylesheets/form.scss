@@ -61,6 +61,39 @@
         width: 100%;
         font-family: $serif;
     }
+
+    .errors-list {
+        font-size: 15px;
+        color: $red;
+        font-style: italic;
+        li {
+            margin-bottom: 2px;
+        }
+
+        margin-bottom: 8px;
+    }
     
 }
 
+button.submit {
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 5px 15px;
+    background-color: $blue;
+    transition: 200ms;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: $serif;
+    margin-right: 12px;
+}
+
+button.submit:hover {
+    transform: scale(1.1);
+    background-color: $purple;
+    transition: 200ms;
+}
+
+.instead {
+    font-size: 15px;
+}

@@ -17,6 +17,13 @@ export default class SignupForm extends Component {
             }); 
         }
     }
+
+    renderErrors() {
+        let errorsList = this.props.errors.map((err, idx) => {
+            return <li key={idx}>{err}</li>
+        })
+        return <ul className='errors-list'>{errorsList}</ul>
+    }
     
     handleSubmit(e) {
 		e.preventDefault();
@@ -28,55 +35,67 @@ export default class SignupForm extends Component {
         let {email, password_confirmation, password} = this.state;
 
         return (
-            <main className="registration-container">
-                <section className="registration">
-                    <h1>Sign up</h1>
+          <main className="registration-container">
+            <section className="registration">
+              <h1>Sign up</h1>
+              {this.renderErrors()}
+              <form
+                className="new_user"
+                id="new_user"
+                onSubmit={this.handleSubmit}
+              >
+                <div className="field">
+                  <label htmlFor="user_email">Email</label>
+                  <br />
+                  <input
+                    onChange={this.update("email")}
+                    value={email}
+                    autoFocus="autoFocus"
+                    autoComplete="email"
+                    type="email"
+                    name="user[email]"
+                    id="user_email"
+                  />
+                </div>
 
-                    <form className="new_user" id="new_user" onSubmit={this.handleSubmit}>
-                        <div className="field">
-                            <label htmlFor="user_email">Email</label><br/>
-                            <input 
-                                onChange={this.update('email')}
-                                value={email}
-                                autoFocus="autoFocus" 
-                                autoComplete="email" 
-                                type="email"
-                                name="user[email]" 
-                                id="user_email"/>
-                        </div>
+                <div className="field">
+                  <label htmlFor="user_password">Password</label>
+                  <em>(6 characters minimum)</em>
+                  <br />
+                  <input
+                    onChange={this.update("password")}
+                    value={password}
+                    autoComplete="new-password"
+                    type="password"
+                    name="user[password]"
+                    id="user_password"
+                  />
+                </div>
 
-                        <div className="field">
-                            <label htmlFor="user_password">Password</label>
-                            <em>(6 characters minimum)</em>
-                            <br/>
-                            <input 
-                                onChange={this.update('password')}
-                                value={password}
-                                autoComplete="new-password" 
-                                type="password" 
-                                name="user[password]" 
-                                id="user_password"/>
-                        </div>
+                <div className="field">
+                  <label htmlFor="user_password_confirmation">
+                    Password confirmation
+                  </label>
+                  <br />
+                  <input
+                    onChange={this.update("password_confirmation")}
+                    value={password_confirmation}
+                    autoComplete="new-password"
+                    type="password"
+                    name="user[password_confirmation]"
+                    id="user_password_confirmation"
+                  />
+                </div>
 
-                        <div className="field">
-                            <label htmlFor="user_password_confirmation">Password confirmation</label><br/>
-                            <input 
-                                onChange={this.update('password_confirmation')}
-                                value={password_confirmation}
-                                autoComplete="new-password" 
-                                type="password"
-                                name="user[password_confirmation]" 
-                                id="user_password_confirmation"/>
-                        </div>
+                <button className="submit">Sign up</button>
+                <Link className="instead" to="/login">
+                  Log in instead
+                </Link>
+              </form>
 
-                        <button>
-                            Sign up
-                        </button>
-                    </form>  
-                    
-                    <Link to="/login">Log in instead</Link><br/>
-                </section>
-            </main>
-        )
+              <br />
+            </section>
+          </main>
+        );
     }
 }

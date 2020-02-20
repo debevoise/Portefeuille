@@ -10,7 +10,7 @@ const Splash = () => (
         A fullstack app completed for NY Tech Talent Pipeline's coding
         challenge. Portefeuille uses Ruby on Rails in the backend, Devise for
         user authentication, as well as React and Redux for frontend management.
-        Data provided by <a href="https://iexcloud.io">IEX Cloud</a>. 
+        Realtime stock market data provided by <a href="https://iexcloud.io">IEX Cloud</a>. 
         Developed by{" "}
         <a
           href="https://www.simondebevoise.com/"

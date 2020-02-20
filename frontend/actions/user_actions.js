@@ -33,7 +33,7 @@ export const loginUser = user => dispatch => {
         data: { user }
     }).then(
         payload => dispatch(receiveUser(payload)),
-        errors => dispatch(receiveErrors(errors))
+        errors => dispatch(receiveErrors(errors.responseJSON))
     )
 };
 

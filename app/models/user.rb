@@ -31,7 +31,6 @@ class User < ApplicationRecord
 			stock.save!
 		end
 
-
 		# return sell_stock(ticker, quantity, unit_price) if quantity < 0
 
 		if self.balance >= quantity * unit_price
@@ -67,7 +66,6 @@ class User < ApplicationRecord
 			})
 			return transaction.save ? transaction : false
 		else
-			self.errors.full_messages << "You can't sell that many stocks."
 			return false
 		end
 	end

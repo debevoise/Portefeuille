@@ -3,7 +3,10 @@ import { connect } from "react-redux"
 import LoginForm from "./login"
 
 const msp = state => (
-    { loggedIn: !!state.user }
+    { 
+        loggedIn: !!state.user,
+        errors: state.errors
+    }
 )
 
 const mdp = dispatch => {

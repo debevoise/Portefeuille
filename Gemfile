@@ -30,11 +30,9 @@ gem 'jbuilder', '~> 2.5'
 #### Simon added these: ####
 gem 'devise'
 gem 'jquery-rails'
-gem 'pry-rails'
-gem 'annotate'
 gem 'webpacker'
 gem 'react-rails'
-gem 'iex-ruby-client'
+# gem 'rails_12factor'
 ############################
 
 # Use ActiveStorage variant
@@ -58,6 +56,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry-rails'
+  gem 'annotate'
 end
 
 group :test do

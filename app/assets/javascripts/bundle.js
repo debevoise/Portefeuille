@@ -291,7 +291,7 @@ var loginUser = function loginUser(user) {
     }).then(function (payload) {
       return dispatch(receiveUser(payload));
     }, function (errors) {
-      return dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_0__["receiveErrors"])(errors));
+      return dispatch(Object(_error_actions__WEBPACK_IMPORTED_MODULE_0__["receiveErrors"])(errors.responseJSON));
     });
   };
 };
@@ -587,6 +587,18 @@ function (_Component) {
       this.props.login(this.state);
     }
   }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      var errorsList = this.props.errors.map(function (err, idx) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: idx
+        }, err);
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "errors-list"
+      }, errorsList);
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$state = this.state,
@@ -596,7 +608,7 @@ function (_Component) {
         className: "registration-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "registration"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Log in"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Log in"), this.renderErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "new_user",
         acceptCharset: "UTF-8",
         onSubmit: this.handleSubmit
@@ -608,7 +620,7 @@ function (_Component) {
         autoFocus: "autoFocus",
         autoComplete: "email",
         type: "email",
-        onChange: this.update('email'),
+        onChange: this.update("email"),
         value: email,
         name: "user[email]",
         id: "user_email"
@@ -619,13 +631,16 @@ function (_Component) {
       }, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         autoComplete: "current-password",
         type: "password",
-        onChange: this.update('password'),
+        onChange: this.update("password"),
         value: password,
         name: "user[password]",
         id: "user_password"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Log in")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "submit"
+      }, "Log in"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "instead",
         to: "/signup"
-      }, "Sign up instead.")));
+      }, "Sign up instead"))));
     }
   }]);
 
@@ -654,7 +669,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state) {
   return {
-    loggedIn: !!state.user
+    loggedIn: !!state.user,
+    errors: state.errors
   };
 };
 
@@ -738,6 +754,18 @@ function (_Component) {
       };
     }
   }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      var errorsList = this.props.errors.map(function (err, idx) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: idx
+        }, err);
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "errors-list"
+      }, errorsList);
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
@@ -755,7 +783,7 @@ function (_Component) {
         className: "registration-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "registration"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Sign up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Sign up"), this.renderErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "new_user",
         id: "new_user",
         onSubmit: this.handleSubmit
@@ -764,7 +792,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "user_email"
       }, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.update('email'),
+        onChange: this.update("email"),
         value: email,
         autoFocus: "autoFocus",
         autoComplete: "email",
@@ -776,7 +804,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "user_password"
       }, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("em", null, "(6 characters minimum)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.update('password'),
+        onChange: this.update("password"),
         value: password,
         autoComplete: "new-password",
         type: "password",
@@ -787,15 +815,18 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "user_password_confirmation"
       }, "Password confirmation"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.update('password_confirmation'),
+        onChange: this.update("password_confirmation"),
         value: password_confirmation,
         autoComplete: "new-password",
         type: "password",
         name: "user[password_confirmation]",
         id: "user_password_confirmation"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Sign up")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "submit"
+      }, "Sign up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "instead",
         to: "/login"
-      }, "Log in instead"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)));
+      }, "Log in instead")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)));
     }
   }]);
 
@@ -824,7 +855,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state) {
   return {
-    loggedIn: !!state.user
+    loggedIn: !!state.user,
+    errors: state.errors
   };
 };
 
@@ -1504,7 +1536,7 @@ var Splash = function Splash() {
     className: "splash-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     className: "splash"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Portefeuille"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Your stocks. Organized."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "A fullstack app completed for NY Tech Talent Pipeline's coding challenge. Portefeuille uses Ruby on Rails in the backend, Devise for user authentication, as well as React and Redux for frontend management. Data provided by ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Portefeuille"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Your stocks. Organized."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "A fullstack app completed for NY Tech Talent Pipeline's coding challenge. Portefeuille uses Ruby on Rails in the backend, Devise for user authentication, as well as React and Redux for frontend management. Realtime stock market data provided by ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://iexcloud.io"
   }, "IEX Cloud"), ". Developed by", " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "https://www.simondebevoise.com/",
@@ -1843,18 +1875,24 @@ var userReducer = function userReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../reducers/root_reducer */ "./frontend/reducers/root_reducer.js");
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var _reducers_root_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/root_reducer */ "./frontend/reducers/root_reducer.js");
 
 
 
+var middlewares = [redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]];
 
+if (true) {
+  // must use 'require' (import only allowed at top of file)
+  var _require = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js"),
+      logger = _require.logger;
+
+  middlewares.push(logger);
+}
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_1__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_3___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_2__["default"], preloadedState, redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"].apply(void 0, middlewares));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
