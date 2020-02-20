@@ -10,7 +10,7 @@ export default class TransactionsIndex extends Component {
     renderEmpty() {
         return (
           <div className="transactions-container empty-container">
-            <h1>Your portfolio</h1>
+            <h1>Transaction Ledger</h1>
             <div className="empty">
               <p>No transactions yet...</p>
               <p>
@@ -26,7 +26,7 @@ export default class TransactionsIndex extends Component {
         if (!stocks || !transactions) {
             return (
               <div className="transactions-container">
-                <h1>Your portfolio</h1>
+                <h1>Transaction Ledger</h1>
                 <div className="loading">Loading...</div>
               </div>
             );

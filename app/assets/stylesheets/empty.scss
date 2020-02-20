@@ -14,11 +14,18 @@
         padding: 20px;
         border-radius: 6px;
         border: 2px solid $purple;
+        box-shadow: 0 0 8px $darkred;
 
         p {
             margin: 10px;
             font-size: 18px;
             text-align: center;
+        }
+
+        p.arrow {
+            font-size: 40px;
+            color: $darkred;
+            margin-bottom: 0;
         }
     }
 }

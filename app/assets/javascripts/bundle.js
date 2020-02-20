@@ -1259,6 +1259,17 @@ function (_Component) {
       this.props.fetchStocks();
     }
   }, {
+    key: "renderEmpty",
+    value: function renderEmpty() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "stocks-index-container empty-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "empty"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You don't own any stocks yet."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Look up and purchase stocks to the right."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "arrow"
+      }, "\u2192")));
+    }
+  }, {
     key: "render",
     value: function render() {
       var stocks = this.props.stocks;
@@ -1267,6 +1278,11 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "loading"
       }, "Loading..."));
+
+      if (stocks.length === 0) {
+        return this.renderEmpty();
+      }
+
       var hasMarketPrice = true;
       var stockList = stocks.map(function (stock) {
         var ticker = stock.ticker,
@@ -1485,7 +1501,7 @@ function (_Component) {
     value: function renderEmpty() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "transactions-container empty-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Transaction Ledger"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "empty"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "No transactions yet..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "You can ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/stocks"
@@ -1502,7 +1518,7 @@ function (_Component) {
       if (!stocks || !transactions) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "transactions-container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Your portfolio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Transaction Ledger"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "loading"
         }, "Loading..."));
       }

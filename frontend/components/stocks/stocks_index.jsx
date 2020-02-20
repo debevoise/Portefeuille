@@ -4,6 +4,21 @@ export default class StocksIndex extends Component {
     componentDidMount() {
         this.props.fetchStocks();
     }
+
+      renderEmpty() {
+        return (
+          <div className="stocks-index-container empty-container">
+            <h1>Your portfolio</h1>
+            <div className="empty">
+              <p>You don't own any stocks yet.</p>
+              <p>Look up and purchase stocks to the right.</p>
+              <p className='arrow'>
+                &#8594;
+              </p>
+            </div>
+          </div>
+        );
+    }
     
     render() {
         let {stocks} = this.props;
@@ -14,6 +29,9 @@ export default class StocksIndex extends Component {
                 <div className='loading'>Loading...</div>
             </div>
         )
+        if (stocks.length === 0) {
+          return this.renderEmpty();
+        }
 
         let hasMarketPrice = true;
         let stockList = stocks.map((stock) => {
