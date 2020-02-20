@@ -31,8 +31,6 @@ class User < ApplicationRecord
 			stock.save!
 		end
 
-		# return sell_stock(ticker, quantity, unit_price) if quantity < 0
-
 		if self.balance >= quantity * unit_price
 			transaction = self.transactions.new({
 				stock_id: stock.id,
