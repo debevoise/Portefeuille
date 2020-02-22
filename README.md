@@ -15,7 +15,7 @@ Ruby on Rails, PostgreSQL, Devise. Rails handles routing and serves JSON formatt
 #### Models & Relations
 ```ruby
 class User < ApplicationRecord
-	validates :balance, numericality: { greater_than_or_equal_to: 0 }
+	validates :balance, numericality: { greater_than_or_equal_to: 0.0 }
 	
 	devise :database_authenticatable, :registerable,
 			:recoverable, :rememberable, :validatable
@@ -44,6 +44,8 @@ end
 
 
 ## Buying stocks
+
+![stock confirmation](app/assets/images/stock_confirm.png)
 
 Users input a stock ticker symbol and their desired quantity. On submit, Portefeuille gathers current information about the stock (company name and price) from the IEX Cloud api and confirms the total price with the user. The stock purchase form displays semantic error messages for invalid ticker names and insufficient funds and prevents users from requesting 
 
@@ -80,5 +82,18 @@ def buy_stock(ticker, company, unit_price, quantity)
 end
 ```
 
-## Stock Index and Transaction Ledger
+## Stock Portfolio and Transaction Ledger
+
+The two main views of Portefeuille. The Stock Portfolio page shows users all of their stocks consolidated across many transactions and makes a batch request to IEX for market data on page load. Gains for the stock pricing are calculated on percent difference between `stock.latestPrice` and `stock.previousClose`. 
+
+```ruby
+@stocks = current_user
+	.transactions
+	.includes(:stock)
+	.group(:stock)
+	.sum('quantity')
+	.to_a
+```
+
+The Transaction Ledger page shows an atomized view of all transactions with date of purchase and the buying price for those stocks at time of purchase. 
 
