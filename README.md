@@ -45,9 +45,10 @@ end
 
 ## Buying stocks
 
-![stock confirmation](app/assets/images/stock_confirm.png)
 
-Users input a stock ticker symbol and their desired quantity. On submit, Portefeuille gathers current information about the stock (company name and price) from the IEX Cloud api and confirms the total price with the user. The stock purchase form displays semantic error messages for invalid ticker names and insufficient funds and prevents users from requesting 
+<img src="app/assets/images/stock_confirm.png" width="300" height="auto" />
+
+Users input a stock ticker symbol and their desired quantity. On submit, Portefeuille gathers current information about the stock (company name and price) from the IEX Cloud api and confirms the total price with the user. The stock purchase form displays semantic error messages for invalid ticker names, insufficient funds, and checks for bad quantities. 
 
 Backend validations on the User and Transaction database models ensure a further layer of protection from illegal requests: 
 
@@ -84,6 +85,9 @@ end
 
 ## Stock Portfolio and Transaction Ledger
 
+
+<img src="app/assets/images/stockindex.png" width="500" height="auto" />
+
 The two main views of Portefeuille. The Stock Portfolio page shows users all of their stocks consolidated across many transactions and makes a batch request to IEX for market data on page load. Gains for the stock pricing are calculated on percent difference between `stock.latestPrice` and `stock.previousClose`. 
 
 ```ruby
@@ -96,4 +100,6 @@ The two main views of Portefeuille. The Stock Portfolio page shows users all of 
 ```
 
 The Transaction Ledger page shows an atomized view of all transactions with date of purchase and the buying price for those stocks at time of purchase. 
+
+
 
