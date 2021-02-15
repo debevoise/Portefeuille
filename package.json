@@ -17,7 +17,7 @@
     "@rails/webpacker": "4.2.2",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery-ujs": "^1.2.2",
     "prop-types": "^15.7.2",
     "rails-ujs": "^5.2.4-1",
